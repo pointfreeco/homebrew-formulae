@@ -4,7 +4,7 @@ class SwiftFormatAT57 < Formula
     url "https://github.com/apple/swift-format.git", :branch => "release/5.7"
     version "5.7"
 
-    depends_on :xcode => ["13.3", :build]
+    depends_on :xcode => ["14.0", :build]
 
     def install
         system "swift build -c release --disable-sandbox --build-path '.build'"
