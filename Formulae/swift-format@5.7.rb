@@ -9,8 +9,12 @@ class SwiftFormatAT57 < Formula
   depends_on :xcode => ["14.0.1", :build]
 
   def install
-    system "swift build -c release --disable-sandbox --build-path '.build'"
+    system "swift", "build", "--disable-sandbox", "-c", "release", "-Xlinker", "-rpath", "-Xlinker", rpath
     bin.install ".build/release/swift-format"
+    if OS.mac?
+      deuniversalize_machos ".build/release/lib_InternalSwiftSyntaxParser.dylib"
+      lib.install ".build/release/lib_InternalSwiftSyntaxParser.dylib"
+    end
   end
 
   test do
